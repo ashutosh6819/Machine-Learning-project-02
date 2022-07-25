@@ -23,6 +23,7 @@ class DataValidation:
         data_ingestion_artifact:DataIngestionArtifact
         ):
         try :
+            logging.info(f"{'='*20}Data validation log is started.{'='*20} \n\n")
             self.data_validation_config = data_validation_config
             self.data_ingestion_artifact = data_ingestion_artifact
 
@@ -70,6 +71,8 @@ class DataValidation:
     def validate_dataset_schema(self):
         try :
             validation_status= False
+
+
 
             validation_status = True
 
@@ -126,6 +129,8 @@ class DataValidation:
             report = self.get_and_save_data_dift_report()
             self.save_data_drift_report_page()
 
+            
+
             return True
         except Exception as e:
             raise HousingException(e,sys) from e
@@ -146,5 +151,10 @@ class DataValidation:
             
             logging.info(f"Data Validation artifact : {data_validation_artifact} ")
 
+            return data_validation_artifact
+
         except Exception as e:
             raise HousingException(e,sys) from e
+
+    def __del__(self):
+        logging.info(f"{'='*20}Data validation log is completed.{'='*20} \n\n")
